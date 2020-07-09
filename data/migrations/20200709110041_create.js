@@ -1,5 +1,5 @@
 exports.up = function (knex) {
-  return knex.schema.createTable('bookshelf', function (table) {
+  return knex.schema.createTable('bookshelfs', function (table) {
     table.increments();
     table.string('name').notNullable();
     table.boolean('private').default(false);
@@ -12,4 +12,6 @@ exports.up = function (knex) {
   });
 };
 
-exports.down = function (knex) {};
+exports.down = function (knex) {
+  return knex.schema.dropTableIfExists('bookshelfs');
+};
