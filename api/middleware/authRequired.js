@@ -30,4 +30,5 @@ const authRequired = async (req, res, next) => {
   }
 };
 
+
 module.exports = authRequired;
