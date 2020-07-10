@@ -9,31 +9,7 @@ const findBy = (filter) => {
 };
 
 const findById = (id) => {
-  return db('books')
-    .where({ id })
-    .first()
-    .select(
-      'id',
-      'googleId',
-      'title',
-      'eTag',
-      'authors',
-      'publisher',
-      'publishDate',
-      'description',
-      'isbn10',
-      'isbn13',
-      'pageCount',
-      'categories',
-      'maturityRating',
-      'thumbnail',
-      'smallThumbnail',
-      'language',
-      'webReaderLink',
-      'textSnippet',
-      'bookFormats',
-      'retailPrice'
-    );
+  return db('books').where({ id }).first();
 };
 
 const create = async (book) => {

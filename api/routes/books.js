@@ -11,7 +11,7 @@ router.get('/', checkForBooks, function (req, res) {
       res.status(200).json(books);
     })
     .catch((err) => {
-      res.status(500).json({ message: 'Unable to retrieve books', err });
+      res.status(500).json({ message: 'Unable to retrieve books', error: err });
     });
 });
 
@@ -21,7 +21,24 @@ router.get('/:bookId', checkForSingleBook, function (req, res) {
       res.status(200).json(book);
     })
     .catch((err) => {
-      res.status(500).json({ message: 'Unable to retrieve request book', err });
+      res
+        .status(500)
+        .json({ message: 'Unable to retrieve request book', error: err });
+    });
+});
+
+router.post('/', function (req, res) {
+  var book = req.body;
+  Books.create(book)
+    .then((book) => {
+      res
+        .status(201)
+        .json({ message: 'Book successfully added our database', book: book });
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Server unable to add book', error: err });
     });
 });
 
