@@ -12,6 +12,7 @@ if (config_result.error) {
 
 var indexRouter = require('./routes/index');
 var profileRouter = require('./routes/profile');
+var booksRouter = require('./routes/books');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use(cookieParser());
 // application routes
 app.use('/', indexRouter);
 app.use(['/profile', '/profiles'], profileRouter);
+app.use('/api/books', booksRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
