@@ -2,6 +2,7 @@ const express = require('express');
 const authRequired = require('../middleware/authRequired');
 const checkForBooks = require('../middleware/booksCheckFor');
 const checkForSingleBook = require('../middleware/checkForSingleBook');
+const createBookRequirements = require('../middleware/createBookRequirements');
 const Books = require('../models/booksModel');
 const router = express.Router();
 
@@ -27,7 +28,7 @@ router.get('/:bookId', checkForSingleBook, function (req, res) {
     });
 });
 
-router.post('/', function (req, res) {
+router.post('/', createBookRequirements, function (req, res) {
   var book = req.body;
   Books.create(book)
     .then((book) => {
