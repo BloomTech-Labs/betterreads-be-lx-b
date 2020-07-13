@@ -28,7 +28,7 @@ router.get('/:bookId', checkForSingleBook, function (req, res) {
     });
 });
 
-router.post('/', createBookRequirements, function (req, res) {
+router.post('/', authRequired, createBookRequirements, function (req, res) {
   var book = req.body;
   Books.create(book)
     .then((book) => {
@@ -40,6 +40,19 @@ router.post('/', createBookRequirements, function (req, res) {
       res
         .status(500)
         .json({ message: 'Server unable to add book', error: err });
+    });
+});
+
+router.delete('/:bookId', authRequired, checkForSingleBook, function (
+  req,
+  res
+) {
+  Books.remove(req.params.bookId)
+    .then((book) => res.status(204).json(book))
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Server failed to delete book', error: err });
     });
 });
 

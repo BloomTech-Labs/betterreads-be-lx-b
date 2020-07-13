@@ -22,7 +22,7 @@ const update = (id, book) => {
 };
 
 const remove = async (id) => {
-  return await db('profiles').where({ id }).del();
+  return await db('books').where({ id }).del();
 };
 
 module.exports = { findAll, findBy, findById, create, update, remove };
