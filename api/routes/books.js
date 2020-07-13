@@ -56,4 +56,15 @@ router.delete('/:bookId', authRequired, checkForSingleBook, function (
     });
 });
 
+router.put('/:bookId', authRequired, checkForSingleBook, function (req, res) {
+  const body = req.body;
+  Books.update(req.params.bookId, body)
+    .then((book) => {
+      res.status(200).json(book);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Server failed to update book' });
+    });
+});
+
 module.exports = router;
